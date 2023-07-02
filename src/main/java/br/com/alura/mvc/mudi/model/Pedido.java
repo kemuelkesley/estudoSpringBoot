@@ -4,13 +4,31 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GeneratorType;
+
+
+@Entity
 public class Pedido {
+		
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String nomeProduto;
 	private BigDecimal valorNegociado;
 	private LocalDate dataEntrega;
 	private String urlProduto;
 	private String urlImagem;
 	private String descricao;
+	
+	@Enumerated(EnumType.STRING)
+	private statusPedido status;
 	
 	
 	
@@ -50,22 +68,19 @@ public class Pedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public statusPedido getStatus() {
+		return status;
+	}
+	public void setStatus(statusPedido status) {
+		this.status = status;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(dataEntrega, descricao, nomeProduto);
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pedido other = (Pedido) obj;
-		return Objects.equals(dataEntrega, other.dataEntrega) && Objects.equals(descricao, other.descricao)
-				&& Objects.equals(nomeProduto, other.nomeProduto);
-	}
+	
+	
 	
 	
 	
