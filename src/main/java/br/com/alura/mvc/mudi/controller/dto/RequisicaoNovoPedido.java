@@ -54,6 +54,7 @@ public class RequisicaoNovoPedido {
 		pedido.setStatus(statusPedido.AGUARDANDO);
 		
 		
+		
 		return pedido;
 	}
 	
